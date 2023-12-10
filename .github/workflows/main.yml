@@ -32,4 +32,5 @@ jobs:
         service_account_email: 'login-ingestion@bm-clients-activation-system.iam.gserviceaccount.com'
         event_trigger_type: 'google.pubsub.topic.publish'
         event_trigger_resource: 'projects/bm-clients-activation-system/topics/login-input-stream-dev'
+        env_vars_file: 'env_vars_file.yml'
         

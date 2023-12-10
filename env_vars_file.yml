@@ -1,0 +1,4 @@
+output_project_name: 'bm-clients-activation-system'
+output_dataset_name: 'raw_dataset_dev'
+valid_table_name: 'login'
+invalid_table_name: 'login-error'

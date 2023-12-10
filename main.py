@@ -1,6 +1,6 @@
 import base64
 
-from messageValidator import check_message_validity
+from persister import persistMessage
 
 
 def ingest_message(event, context):
@@ -8,5 +8,4 @@ def ingest_message(event, context):
 
     print(f"A new login message is received: {message}")
 
-    is_valid_message = check_message_validity(message)
-    print(f"Message is valid: {is_valid_message}")
+    persistMessage(message)
