@@ -3,3 +3,5 @@
 
 .idea/
 venv/
+resources/
+local_main.py
