@@ -1,0 +1,35 @@
+name: deploy cloud function CI
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  job_id:
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+    - uses: 'actions/checkout@v4'
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/763721129948/locations/global/workloadIdentityPools/github-actions-pool/providers/github-actions-provider'
+        service_account: 'github-actions@bm-clients-activation-system.iam.gserviceaccount.com'
+
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-cloud-functions@v1'
+      with:
+        project_id: 'bm-clients-activation-system'
+        name: 'login-ingestion'
+        runtime: 'pyhton39'
+        entry_point: 'ingest_message'
+        memory_mb: 128
+        region: 'europe-west1'
+        service_account_email: 'login-ingestion@bm-clients-activation-system.iam.gserviceaccount.com'
+        event_trigger_type: 'google.pubsub.topic.publish'
+        event_trigger_resource: 'login-input-stream-dev'
+        
